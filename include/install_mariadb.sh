@@ -55,6 +55,9 @@ function install_mariadb(){
         fi
     fi
 
+    [ -z "`grep /usr/local/lib /etc/ld.so.conf.d/*.conf`" ] && echo '/usr/local/lib' > /etc/ld.so.conf.d/meteorite-local.conf
+    ldconfig -v
+
     cd ${METEORITE_DIR}/src
     tar zxvf mariadb-${MARIADB_VER}-linux-systemd-x86_64.tar.gz
     mv mariadb-${MARIADB_VER}-linux-systemd-x86_64/* ${MARIADB_DIR}
