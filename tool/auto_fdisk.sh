@@ -3,7 +3,7 @@
 # Github:    https://github.com/vtrois/meteorite
 # Author:    Seaton Jiang <seaton@vtrois.com>
 # License:   MIT
-# Date:      2021-01-28
+# Date:      2021-01-30
 
 function fdisk_mkfs(){
 fdisk $1 << EOF
@@ -30,7 +30,7 @@ while mount | grep "${DISK}" >/dev/null 2>&1;do
     if [[ ! "${UMOUNT}" =~ ^[y,n,Y,N]$ ]]; then
         echo -en "${RGB_ERROR}Please try again [y/n]:${RGB_END}"
     else
-        if [ "${UMOUNT}" = 'y' ] || [ "${UMOUNT}" = 'Y' ]; then
+        if [ "${UMOUNT}" == 'y' ] || [ "${UMOUNT}" == 'Y' ]; then
             echo -en "${RGB_WAIT}Unloading...${RGB_END}"
             for i in `mount | grep "${DISK}" | awk '{print $3}'`;do
                 fuser -km $i >/dev/null
@@ -51,7 +51,7 @@ while mount | grep "${DISK}" >/dev/null 2>&1;do
     if [[ ! "${CHOICE}" =~ ^[y,n,Y,N]$ ]]; then
         echo -en "${RGB_ERROR}Please try again [y/n]:${RGB_END}"
     else
-        if [ "${CHOICE}" = 'y' ] || ["${CHOICE}" = 'Y' ]; then
+        if [ "${CHOICE}" == 'y' ] || ["${CHOICE}" == 'Y' ]; then
             echo -en "${RGB_WAIT}Formatting...${RGB_END}"
             dd if=/dev/zero of=${DISK} bs=512 count=1 &>/dev/null
             sync

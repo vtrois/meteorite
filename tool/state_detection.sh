@@ -3,7 +3,7 @@
 # Github:    https://github.com/vtrois/meteorite
 # Author:    Seaton Jiang <seaton@vtrois.com>
 # License:   MIT
-# Date:      2021-01-28
+# Date:      2021-01-30
 
 function state_detection(){
     clear
@@ -96,7 +96,7 @@ function state_detection(){
         lsmod | grep bbr
     fi
 
-    if [ "${CHECK_IPV6}" = "true" ]; then
+    if [ "${CHECK_IPV6}" == "true" ]; then
         echo -e "\n${RGB_WARNING}============= IPV6 Detection =============${RGB_END}"
         grep "^[^#.*]" /etc/sysconfig/network-scripts/ifcfg-eth0
     fi

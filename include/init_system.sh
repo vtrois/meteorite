@@ -3,7 +3,7 @@
 # Github:    https://github.com/vtrois/meteorite
 # Author:    Seaton Jiang <seaton@vtrois.com>
 # License:   MIT
-# Date:      2021-01-28
+# Date:      2021-01-30
 
 function init_system(){
     [ -f "${METEORITE_DIR}/tmp/init_system.lock" ] && echo -e "${RGB_INFO}Notice: Init system script has already been run!${RGB_END}" && return
@@ -303,7 +303,7 @@ EOF
     fi
 
     # 开启 IPV6
-    if [ "${CHECK_IPV6}" = "true" ]; then
+    if [ "${CHECK_IPV6}" == "true" ]; then
         echo '# 开启 IPV6' >> /etc/sysctl.conf
         echo 'net.ipv6.conf.all.disable_ipv6=0' >> /etc/sysctl.conf
         echo 'net.ipv6.conf.default.disable_ipv6=0' >> /etc/sysctl.conf

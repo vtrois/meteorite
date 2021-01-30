@@ -3,7 +3,7 @@
 # Github:    https://github.com/vtrois/meteorite
 # Author:    Seaton Jiang <seaton@vtrois.com>
 # License:   MIT
-# Date:      2021-01-28
+# Date:      2021-01-30
 
 RGB_SUCCESS='\033[32m'
 RGB_ERROR='\033[31;1m'
@@ -26,14 +26,14 @@ CHECK_MARIADB_PSW=$( dd if=/dev/urandom bs=1 count=15 2>/dev/null | base64 -w 0 
 PROCESSOR=$( grep 'processor' /proc/cpuinfo | sort -u | wc -l )
 MAXMEMORY=$( expr $CHECK_MEM / 8 )
 
-if [ "${MARIADB_PSW}" = "Meteorite-Mariadb" ]; then
+if [ "${MARIADB_PSW}" == "Meteorite-Mariadb" ]; then
     SET_MARIADB_PSW=${CHECK_MARIADB_PSW}
     sed -i "s@Meteorite-Mariadb@${CHECK_MARIADB_PSW}@" ${METEORITE_DIR}/options.conf
 else
     SET_MARIADB_PSW=${MARIADB_PSW}
 fi
 
-if [ "${REDIS_PSW}" = "Meteorite-Redis" ]; then
+if [ "${REDIS_PSW}" == "Meteorite-Redis" ]; then
     SET_REDIS_PSW=${CHECK_REDIS_PSW}
     sed -i "s@Meteorite-Redis@${CHECK_REDIS_PSW}@" ${METEORITE_DIR}/options.conf
 else
@@ -82,7 +82,7 @@ else
     RELEASE=unknown
 fi
 
-if [ "${RELEASE}" = "centos" ];then
+if [ "${RELEASE}" == "centos" ];then
     [ $( cat /etc/redhat-release | sed -r 's/.* ([0-9]+)\..*/\1/' ) -eq 7 ] && CHECK_CENTOS='true'
 fi
 

@@ -3,7 +3,7 @@
 # Github:    https://github.com/vtrois/meteorite
 # Author:    Seaton Jiang <seaton@vtrois.com>
 # License:   MIT
-# Date:      2021-01-28
+# Date:      2021-01-30
 
 export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
 export LANG="en_US.UTF-8"
@@ -21,6 +21,7 @@ source include/install_mariadb.sh
 source include/install_redis.sh
 source include/install_memcached.sh
 source include/install_imagemagick.sh
+source include/add_site.sh
 source tool/auto_fdisk.sh
 source tool/clear_log.sh
 source tool/creat_trash.sh
@@ -132,40 +133,40 @@ function meteorite_manual(){
         fi
     done
 
-    if [ "${MANUAL_INIT}" = "n" ] && [ "${MANUAL_OPENRESTY}" = "n" ] && [ "${MANUAL_PHP}" = "n" ] && [ "${MANUAL_MARIADB}" = "n" ] && [ "${MANUAL_REDIS}" = "n" ] && [ "${MANUAL_MEMCACHED}" = "n" ];then
+    if [ "${MANUAL_INIT}" == "n" ] && [ "${MANUAL_OPENRESTY}" == "n" ] && [ "${MANUAL_PHP}" == "n" ] && [ "${MANUAL_MARIADB}" == "n" ] && [ "${MANUAL_REDIS}" == "n" ] && [ "${MANUAL_MEMCACHED}" == "n" ];then
         echo -e "${RGB_INFO}Bye!${RGB_END}"
         exit 0
     fi
 
     yum update -y
 
-    if [ "${MANUAL_INIT}" = "y" ]; then
+    if [ "${MANUAL_INIT}" == "y" ]; then
         install_openssl 2>&1 | tee -a ${METEORITE_DIR}/log/install_openssl.log
         install_openssh 2>&1 | tee -a ${METEORITE_DIR}/log/install_openssh.log
         init_system
     fi
 
-    if [ "${MANUAL_OPENRESTY}" = "y" ]; then
+    if [ "${MANUAL_OPENRESTY}" == "y" ]; then
         install_openresty 2>&1 | tee -a ${METEORITE_DIR}/log/install_openresty.log
     fi
 
-    if [ "${MANUAL_PHP}" = "y" ]; then
+    if [ "${MANUAL_PHP}" == "y" ]; then
         install_php 2>&1 | tee -a ${METEORITE_DIR}/log/install_php.log
     fi
 
-    if [ "${MANUAL_MARIADB}" = "y" ]; then
+    if [ "${MANUAL_MARIADB}" == "y" ]; then
         install_mariadb 2>&1 | tee -a ${METEORITE_DIR}/log/install_mariadb.log
     fi
 
-    if [ "${MANUAL_REDIS}" = "y" ]; then
+    if [ "${MANUAL_REDIS}" == "y" ]; then
         install_redis 2>&1 | tee -a ${METEORITE_DIR}/log/install_redis.log
     fi
 
-    if [ "${MANUAL_MEMCACHED}" = "y" ]; then
+    if [ "${MANUAL_MEMCACHED}" == "y" ]; then
         install_memcached 2>&1 | tee -a ${METEORITE_DIR}/log/install_memcached.log
     fi
 
-    if [ "${MANUAL_OPENRESTY}" = "y" ] && [ "${MANUAL_PHP}" = "y" ]; then
+    if [ "${MANUAL_OPENRESTY}" == "y" ] && [ "${MANUAL_PHP}" == "y" ]; then
         check_demo
     fi
 
@@ -174,7 +175,7 @@ function meteorite_manual(){
     echo -e "${RGB_SUCCESS}Notice:${RGB_END}"
     echo -e "${RGB_SUCCESS}1) Server needs to be reboot.${RGB_END}"
     echo -e "${RGB_SUCCESS}2) Please check if the service is running normally after the server is started.${RGB_END}"
-    if [ "${MANUAL_OPENRESTY}" = "y" ];then 
+    if [ "${MANUAL_OPENRESTY}" == "y" ];then 
         echo -e "${RGB_SUCCESS}3) If everything checks out, run the following command:${RGB_END}"
         echo -e "openssl dhparam -out ${OPENRESTY_DIR}/nginx/conf/ssl/dhparam.pem 4096"
     fi
@@ -184,7 +185,7 @@ function meteorite_manual(){
         read CHECK_REBOOT
         if [[ ! "${CHECK_REBOOT}" =~ ^[y,Y,n,N]$ ]]; then
             echo -en "${RGB_ERROR}There is an error in your input, please enter 'y' or 'n':${RGB_END}"
-        elif [ "${CHECK_REBOOT}" = 'y' ] || [ "${CHECK_REBOOT}" = 'Y' ]; then
+        elif [ "${CHECK_REBOOT}" == 'y' ] || [ "${CHECK_REBOOT}" == 'Y' ]; then
             reboot
         else
             break
@@ -268,6 +269,10 @@ while :; do
         --install_imagemagick)
             install_imagemagick 2>&1 | tee -a ${METEORITE_DIR}/log/install_imagemagick.log
             shift
+        ;;
+        -a|--add_site)
+            add_site
+            exit 0
         ;;
         -f|--auto_fdisk)
             auto_fdisk
