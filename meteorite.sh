@@ -21,7 +21,8 @@ source include/install_mariadb.sh
 source include/install_redis.sh
 source include/install_memcached.sh
 source include/install_imagemagick.sh
-source include/add_site.sh
+source include/add_website.sh
+source include/del_website.sh
 source tool/auto_fdisk.sh
 source tool/clear_log.sh
 source tool/creat_trash.sh
@@ -47,6 +48,8 @@ function show_help(){
     echo -e "  --install_redis                Install version ${REDIS_VER} of Redis Server and version ${PECL_REDIS_VER} of pecl-redis."
     echo -e "  --install_memcached            Install version ${MEMCACHED_VER} of Memcached Server and version ${PECL_MEMCACHED_VER} of pecl-memcached."
     echo -e "  --install_imagemagick          Install version ${IMAGEMAGICK_VER} of ImageMagick Server and version ${PECL_IMAGICK_VER} of pecl-imagick."
+    echo -e "  -a, --add_website              Add website and related files"
+    echo -e "  -d, --del_website              Delete website and related files"
     echo -e "  -f, --auto_fdisk               Hard drive auto fdisk tool."
     echo -e "  -c, --clear_log                Clear all system logs."
     echo -e "  -t, --creat_trash              Give the root account the rm command to create a recycle bin."
@@ -269,8 +272,12 @@ while :; do
             install_imagemagick 2>&1 | tee -a ${METEORITE_DIR}/log/install_imagemagick.log
             shift
         ;;
-        -a|--add_site)
-            add_site
+        -a|--add_website)
+            add_website
+            exit 0
+        ;;
+        -d|--del_website)
+            del_website
             exit 0
         ;;
         -f|--auto_fdisk)
