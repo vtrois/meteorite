@@ -3,7 +3,7 @@
 # Github:    https://github.com/vtrois/meteorite
 # Author:    Seaton Jiang <seaton@vtrois.com>
 # License:   MIT
-# Date:      2021-01-30
+# Date:      2021-01-31
 
 export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
 export LANG="en_US.UTF-8"
@@ -214,8 +214,7 @@ function meteorite_auto(){
     echo -e "${RGB_SUCCESS}Notice:${RGB_END}"
     echo -e "${RGB_SUCCESS}1) The server is being restarted. ${RGB_END}"
     echo -e "${RGB_SUCCESS}2) Please check if the service is running normally after the server is started.${RGB_END}"
-    echo -e "${RGB_SUCCESS}3) If everything checks out, run the following command:${RGB_END}"
-    echo -e "openssl dhparam -out ${OPENRESTY_DIR}/nginx/conf/ssl/dhparam.pem 4096\n"
+    echo -e "${RGB_SUCCESS}3) If everything checks out, run the following command:${RGB_END} openssl dhparam -out ${OPENRESTY_DIR}/nginx/conf/ssl/dhparam.pem 4096"
     reboot
 }
 
