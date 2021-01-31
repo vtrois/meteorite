@@ -3,7 +3,7 @@
 # Github:    https://github.com/vtrois/meteorite
 # Author:    Seaton Jiang <seaton@vtrois.com>
 # License:   MIT
-# Date:      2021-01-28
+# Date:      2021-01-31
 
 function check_info(){
     echo -e "${RGB_SUCCESS}            __  ___       __                      _  __                 ${RGB_END}"
@@ -125,5 +125,15 @@ function check_sources(){
     # ocp.php
     if [ ! -f "ocp.php" ]; then
         wget ${METEORITE_MIRRORS}/meteorite/config/ocp.php
+    fi
+
+    # wordpress.php
+    if [ ! -f "wordpress.conf" ]; then
+        wget ${METEORITE_MIRRORS}/meteorite/config/wordpress.conf
+    fi
+
+    # laravel.php
+    if [ ! -f "laravel.conf" ]; then
+        wget ${METEORITE_MIRRORS}/meteorite/config/laravel.conf
     fi
 }
