@@ -6,8 +6,8 @@
 # Date:      2021-01-28
 
 function install_kernel(){
-    [ -f "${METEORITE_DIR}/tmp/install_kernel.lock" ] && echo -e "${RGB_INFO}Notice: Kernel installation script has already been run!${RGB_END}" && return
-    touch ${METEORITE_DIR}/tmp/install_kernel.lock
+    [ -f "/root/.meteorite/tmp/install_kernel.lock" ] && echo -e "${RGB_INFO}Notice: Kernel installation script has already been run!${RGB_END}" && return
+    touch /root/.meteorite/tmp/install_kernel.lock
 
     yum update -y
     rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org

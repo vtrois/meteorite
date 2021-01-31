@@ -6,8 +6,8 @@
 # Date:      2021-01-28
 
 function install_openssh(){
-    [ -f "${METEORITE_DIR}/tmp/install_openssh.lock" ] && echo -e "${RGB_INFO}Notice: OpenSSH installation script has already been run!${RGB_END}" && return
-    touch ${METEORITE_DIR}/tmp/install_openssh.lock
+    [ -f "/root/.meteorite/tmp/install_openssh.lock" ] && echo -e "${RGB_INFO}Notice: OpenSSH installation script has already been run!${RGB_END}" && return
+    touch /root/.meteorite/tmp/install_openssh.lock
 
     check_yum
 

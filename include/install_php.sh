@@ -6,8 +6,8 @@
 # Date:      2021-01-28
 
 function install_php(){
-    [ -f "${METEORITE_DIR}/tmp/install_php.lock" ] && echo -e "${RGB_INFO}Notice: PHP installation script has already been run!${RGB_END}" && return
-    touch ${METEORITE_DIR}/tmp/install_php.lock
+    [ -f "/root/.meteorite/tmp/install_php.lock" ] && echo -e "${RGB_INFO}Notice: PHP installation script has already been run!${RGB_END}" && return
+    touch /root/.meteorite/tmp/install_php.lock
 
     check_yum
 

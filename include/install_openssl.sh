@@ -6,8 +6,8 @@
 # Date:      2021-01-28
 
 function install_openssl(){
-    [ -f "${METEORITE_DIR}/tmp/install_openssl.lock" ] && echo -e "${RGB_INFO}Notice: OpenSSL installation script has already been run!${RGB_END}" && return
-    touch ${METEORITE_DIR}/tmp/install_openssl.lock
+    [ -f "/root/.meteorite/tmp/install_openssl.lock" ] && echo -e "${RGB_INFO}Notice: OpenSSL installation script has already been run!${RGB_END}" && return
+    touch /root/.meteorite/tmp/install_openssl.lock
 
     check_sources
     check_yum

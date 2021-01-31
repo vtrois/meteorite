@@ -144,29 +144,29 @@ function meteorite_manual(){
     yum update -y
 
     if [ "${MANUAL_INIT}" == "y" ]; then
-        install_openssl 2>&1 | tee -a ${METEORITE_DIR}/log/install_openssl.log
-        install_openssh 2>&1 | tee -a ${METEORITE_DIR}/log/install_openssh.log
+        install_openssl 2>&1 | tee -a /root/.meteorite/log/install_openssl.log
+        install_openssh 2>&1 | tee -a /root/.meteorite/log/install_openssh.log
         init_system
     fi
 
     if [ "${MANUAL_OPENRESTY}" == "y" ]; then
-        install_openresty 2>&1 | tee -a ${METEORITE_DIR}/log/install_openresty.log
+        install_openresty 2>&1 | tee -a /root/.meteorite/log/install_openresty.log
     fi
 
     if [ "${MANUAL_PHP}" == "y" ]; then
-        install_php 2>&1 | tee -a ${METEORITE_DIR}/log/install_php.log
+        install_php 2>&1 | tee -a /root/.meteorite/log/install_php.log
     fi
 
     if [ "${MANUAL_MARIADB}" == "y" ]; then
-        install_mariadb 2>&1 | tee -a ${METEORITE_DIR}/log/install_mariadb.log
+        install_mariadb 2>&1 | tee -a /root/.meteorite/log/install_mariadb.log
     fi
 
     if [ "${MANUAL_REDIS}" == "y" ]; then
-        install_redis 2>&1 | tee -a ${METEORITE_DIR}/log/install_redis.log
+        install_redis 2>&1 | tee -a /root/.meteorite/log/install_redis.log
     fi
 
     if [ "${MANUAL_MEMCACHED}" == "y" ]; then
-        install_memcached 2>&1 | tee -a ${METEORITE_DIR}/log/install_memcached.log
+        install_memcached 2>&1 | tee -a /root/.meteorite/log/install_memcached.log
     fi
 
     if [ "${MANUAL_OPENRESTY}" == "y" ] && [ "${MANUAL_PHP}" == "y" ]; then
@@ -199,19 +199,19 @@ function meteorite_manual(){
 function meteorite_auto(){
     clear
     check_info
-    [ -f "${METEORITE_DIR}/tmp/meteorite_auto.lock" ] && echo -e "${RGB_INFO}The Meteorite tool has already been run, please do not run the automatic tool repeatedly!${RGB_END}" && exit 0
+    [ -f "/root/.meteorite/tmp/meteorite_auto.lock" ] && echo -e "${RGB_INFO}The Meteorite tool has already been run, please do not run the automatic tool repeatedly!${RGB_END}" && exit 0
     sleep 2
     yum update -y
-    install_openssl 2>&1 | tee -a ${METEORITE_DIR}/log/install_openssl.log
-    install_openssh 2>&1 | tee -a ${METEORITE_DIR}/log/install_openssh.log
+    install_openssl 2>&1 | tee -a /root/.meteorite/log/install_openssl.log
+    install_openssh 2>&1 | tee -a /root/.meteorite/log/install_openssh.log
     init_system
-    install_openresty 2>&1 | tee -a ${METEORITE_DIR}/log/install_openresty.log
-    install_php 2>&1 | tee -a ${METEORITE_DIR}/log/install_php.log
-    install_mariadb 2>&1 | tee -a ${METEORITE_DIR}/log/install_mariadb.log
-    install_redis 2>&1 | tee -a ${METEORITE_DIR}/log/install_redis.log
-    install_memcached 2>&1 | tee -a ${METEORITE_DIR}/log/install_memcached.log
+    install_openresty 2>&1 | tee -a /root/.meteorite/log/install_openresty.log
+    install_php 2>&1 | tee -a /root/.meteorite/log/install_php.log
+    install_mariadb 2>&1 | tee -a /root/.meteorite/log/install_mariadb.log
+    install_redis 2>&1 | tee -a /root/.meteorite/log/install_redis.log
+    install_memcached 2>&1 | tee -a /root/.meteorite/log/install_memcached.log
     check_demo
-    touch ${METEORITE_DIR}/tmp/meteorite_auto.lock
+    touch /root/.meteorite/tmp/meteorite_auto.lock
     clear_log
     service_overview
     echo -e "${RGB_SUCCESS}Notice:${RGB_END}"
@@ -237,39 +237,39 @@ while :; do
             shift
         ;;
         --install_kernel)
-            install_kernel 2>&1 | tee -a ${METEORITE_DIR}/log/install_kernel.log
+            install_kernel 2>&1 | tee -a /root/.meteorite/log/install_kernel.log
             exit 0
         ;;
         --install_openssl)
-            install_openssl 2>&1 | tee -a ${METEORITE_DIR}/log/install_openssl.log
+            install_openssl 2>&1 | tee -a /root/.meteorite/log/install_openssl.log
             shift
         ;;
         --install_openssh)
-            install_openssh 2>&1 | tee -a ${METEORITE_DIR}/log/install_openssh.log
+            install_openssh 2>&1 | tee -a /root/.meteorite/log/install_openssh.log
             shift
         ;;
         --install_openresty)
-            install_openresty 2>&1 | tee -a ${METEORITE_DIR}/log/install_openresty.log
+            install_openresty 2>&1 | tee -a /root/.meteorite/log/install_openresty.log
             shift
         ;;
         --install_php)
-            install_php 2>&1 | tee -a ${METEORITE_DIR}/log/install_php.log
+            install_php 2>&1 | tee -a /root/.meteorite/log/install_php.log
             shift
         ;;
         --install_mariadb)
-            install_mariadb 2>&1 | tee -a ${METEORITE_DIR}/log/install_mariadb.log
+            install_mariadb 2>&1 | tee -a /root/.meteorite/log/install_mariadb.log
             shift
         ;;
         --install_redis)
-            install_redis 2>&1 | tee -a ${METEORITE_DIR}/log/install_redis.log
+            install_redis 2>&1 | tee -a /root/.meteorite/log/install_redis.log
             shift
         ;;
         --install_memcached)
-            install_memcached 2>&1 | tee -a ${METEORITE_DIR}/log/install_memcached.log
+            install_memcached 2>&1 | tee -a /root/.meteorite/log/install_memcached.log
             shift
         ;;
         --install_imagemagick)
-            install_imagemagick 2>&1 | tee -a ${METEORITE_DIR}/log/install_imagemagick.log
+            install_imagemagick 2>&1 | tee -a /root/.meteorite/log/install_imagemagick.log
             shift
         ;;
         -a|--add_website)

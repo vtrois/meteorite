@@ -6,8 +6,8 @@
 # Date:      2021-01-28
 
 function install_redis(){
-    [ -f "${METEORITE_DIR}/tmp/install_redis.lock" ] && echo -e "${RGB_INFO}Notice: Redis installation script has already been run!${RGB_END}" && return
-    touch ${METEORITE_DIR}/tmp/install_redis.lock
+    [ -f "/root/.meteorite/tmp/install_redis.lock" ] && echo -e "${RGB_INFO}Notice: Redis installation script has already been run!${RGB_END}" && return
+    touch /root/.meteorite/tmp/install_redis.lock
 
     check_yum
 

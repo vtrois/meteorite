@@ -6,8 +6,8 @@
 # Date:      2021-01-28
 
 function install_mariadb(){
-    [ -f "${METEORITE_DIR}/tmp/install_mariadb.lock" ] && echo -e "${RGB_INFO}Notice: MariaDB installation script has already been run!${RGB_END}" && return
-    touch ${METEORITE_DIR}/tmp/install_mariadb.lock
+    [ -f "/root/.meteorite/tmp/install_mariadb.lock" ] && echo -e "${RGB_INFO}Notice: MariaDB installation script has already been run!${RGB_END}" && return
+    touch /root/.meteorite/tmp/install_mariadb.lock
 
     TENCENTCLOUD=$( wget -qO- -t1 -T2 metadata.tencentyun.com )
     ALICLOUD=$( wget -qO- -t1 -T2 100.100.100.200 )

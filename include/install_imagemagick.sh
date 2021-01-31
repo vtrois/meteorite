@@ -6,8 +6,8 @@
 # Date:      2021-01-28
 
 function install_imagemagick(){
-    [ -f "${METEORITE_DIR}/tmp/install_imagemagick.lock" ] && echo -e "${RGB_INFO}Notice: ImageMagick installation script has already been run!${RGB_END}" && return
-    touch ${METEORITE_DIR}/tmp/install_imagemagick.lock
+    [ -f "/root/.meteorite/tmp/install_imagemagick.lock" ] && echo -e "${RGB_INFO}Notice: ImageMagick installation script has already been run!${RGB_END}" && return
+    touch /root/.meteorite/tmp/install_imagemagick.lock
 
     check_yum
 

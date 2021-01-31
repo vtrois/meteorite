@@ -6,8 +6,8 @@
 # Date:      2021-01-28
 
 function install_memcached(){
-    [ -f "${METEORITE_DIR}/tmp/install_memcached.lock" ] && echo -e "${RGB_INFO}Notice: Memcached installation script has already been run!${RGB_END}" && return
-    touch ${METEORITE_DIR}/tmp/install_memcached.lock
+    [ -f "/root/.meteorite/tmp/install_memcached.lock" ] && echo -e "${RGB_INFO}Notice: Memcached installation script has already been run!${RGB_END}" && return
+    touch /root/.meteorite/tmp/install_memcached.lock
 
     check_sources
     check_yum

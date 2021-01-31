@@ -6,8 +6,8 @@
 # Date:      2021-01-28
 
 function install_openresty(){
-    [ -f "${METEORITE_DIR}/tmp/install_openresty.lock" ] && echo -e "${RGB_INFO}Notice: OpenResty installation script has already been run!${RGB_END}" && return
-    touch ${METEORITE_DIR}/tmp/install_openresty.lock
+    [ -f "/root/.meteorite/tmp/install_openresty.lock" ] && echo -e "${RGB_INFO}Notice: OpenResty installation script has already been run!${RGB_END}" && return
+    touch /root/.meteorite/tmp/install_openresty.lock
 
     check_sources
     check_yum

@@ -23,14 +23,14 @@ function state_detection(){
 
     echo -e "\n${RGB_WARNING}============= OpenSSL Version Detection =============${RGB_END}"
     openssl version -a
-    if [ -f "${METEORITE_DIR}/tmp/init_system.lock" ];then
+    if [ -f "/root/.meteorite/tmp/init_system.lock" ];then
         ls -l ${OPENSSL_DIR}/cacert.pem
     fi
 
     echo -e "\n${RGB_WARNING}============= OpenSSH Version Detection =============${RGB_END}"
     ssh -V
 
-    if [ -f "${METEORITE_DIR}/tmp/init_system.lock" ];then
+    if [ -f "/root/.meteorite/tmp/init_system.lock" ];then
         echo -e "\n${RGB_WARNING}============= Custom Config Detection =============${RGB_END}"
         cat /etc/profile.d/meteorite.sh
     fi
@@ -60,7 +60,7 @@ function state_detection(){
     cut -d : -f 1 /etc/passwd
     cat /etc/group
 
-    if [ -f "${METEORITE_DIR}/tmp/init_system.lock" ];then
+    if [ -f "/root/.meteorite/tmp/init_system.lock" ];then
         echo -e "\n${RGB_WARNING}============= Time-out Detection =============${RGB_END}"
         cat /etc/profile.d/time_out.sh
     fi
@@ -108,7 +108,7 @@ function state_detection(){
     echo -e "\n${RGB_WARNING}============= Repo List Detection =============${RGB_END}"
     yum repolist all
 
-    if [ -f "${METEORITE_DIR}/tmp/install_openresty.lock" ];then
+    if [ -f "/root/.meteorite/tmp/install_openresty.lock" ];then
         echo -e "\n${RGB_WARNING}============= Nginx Version Detection =============${RGB_END}"
         ${OPENRESTY_DIR}/nginx/sbin/nginx -V
 
@@ -126,7 +126,7 @@ function state_detection(){
         cat /etc/logrotate.d/nginx
     fi
 
-    if [ -f "${METEORITE_DIR}/tmp/install_php.lock" ];then
+    if [ -f "/root/.meteorite/tmp/install_php.lock" ];then
         echo -e "\n${RGB_WARNING}============= PHP Version Detection =============${RGB_END}"
         ${PHP_DIR}/bin/php -v
 
@@ -146,7 +146,7 @@ function state_detection(){
         cat /etc/logrotate.d/php
     fi
 
-    if [ -f "${METEORITE_DIR}/tmp/install_mariadb.lock" ];then
+    if [ -f "/root/.meteorite/tmp/install_mariadb.lock" ];then
         echo -e "\n${RGB_WARNING}============= Mariadb Version Detection =============${RGB_END}"
         ${MARIADB_DIR}/bin/mysql -V
 
@@ -154,7 +154,7 @@ function state_detection(){
         grep "^[^#.*]" /etc/my.cnf
     fi
 
-    if [ -f "${METEORITE_DIR}/tmp/install_redis.lock" ];then
+    if [ -f "/root/.meteorite/tmp/install_redis.lock" ];then
         echo -e "\n${RGB_WARNING}============= Redis Version Detection =============${RGB_END}"
         ${REDIS_DIR}/bin/redis-server -v
 
@@ -172,7 +172,7 @@ function state_detection(){
         cat /sys/kernel/mm/transparent_hugepage/defrag
     fi
 
-    if [ -f "${METEORITE_DIR}/tmp/install_memcached.lock" ];then
+    if [ -f "/root/.meteorite/tmp/install_memcached.lock" ];then
         echo -e "\n${RGB_WARNING}============= Memcached Version Detection =============${RGB_END}"
         ${MEMCACHED_DIR}/bin/memcached -V
 
@@ -186,7 +186,7 @@ function state_detection(){
         cat ${PHP_DIR}/etc/php.d/memcached.ini
     fi
 
-    if [ -f "${METEORITE_DIR}/tmp/install_imagemagick.lock" ];then
+    if [ -f "/root/.meteorite/tmp/install_imagemagick.lock" ];then
         echo -e "\n${RGB_WARNING}============= ImageMagick Version Detection =============${RGB_END}"
         /usr/local/imagemagick/bin/convert -version
     fi

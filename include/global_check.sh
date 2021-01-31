@@ -76,8 +76,8 @@ function check_demo(){
 }
 
 function check_sources(){
-    [ -f "${METEORITE_DIR}/tmp/check_sources.lock" ] && return
-    touch ${METEORITE_DIR}/tmp/check_sources.lock
+    [ -f "/root/.meteorite/tmp/check_sources.lock" ] && return
+    touch /root/.meteorite/tmp/check_sources.lock
 
     cd ${METEORITE_DIR}/config
 

@@ -6,8 +6,8 @@
 # Date:      2021-01-28
 
 function creat_trash(){
-    [ -f "${METEORITE_DIR}/tmp/creat_trash.lock" ] && echo -e "${RGB_INFO}Notice: Trash creation script has already been run!${RGB_END}" && return
-    touch ${METEORITE_DIR}/tmp/creat_trash.lock
+    [ -f "/root/.meteorite/tmp/creat_trash.lock" ] && echo -e "${RGB_INFO}Notice: Trash creation script has already been run!${RGB_END}" && return
+    touch /root/.meteorite/tmp/creat_trash.lock
 
     [ ! -d "~/.trash" ] && mkdir -p ~/.trash
 

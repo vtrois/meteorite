@@ -86,6 +86,10 @@ if [ "${RELEASE}" == "centos" ];then
     [ $( cat /etc/redhat-release | sed -r 's/.* ([0-9]+)\..*/\1/' ) -eq 7 ] && CHECK_CENTOS='true'
 fi
 
-for METEORITE_DIR_NAME in config src log tmp; do
+for METEORITE_DIR_NAME in config src; do
     [ ! -d "${METEORITE_DIR}/${METEORITE_DIR_NAME}" ] && mkdir -p ${METEORITE_DIR}/${METEORITE_DIR_NAME}
+done
+
+for METEORITE_TOOL_DIR in log tmp; do
+    [ ! -d "/root/.meteorite/${METEORITE_TOOL_DIR}" ] && mkdir -p /root/.meteorite/${METEORITE_TOOL_DIR}
 done

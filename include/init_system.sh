@@ -6,8 +6,8 @@
 # Date:      2021-01-30
 
 function init_system(){
-    [ -f "${METEORITE_DIR}/tmp/init_system.lock" ] && echo -e "${RGB_INFO}Notice: Init system script has already been run!${RGB_END}" && return
-    touch ${METEORITE_DIR}/tmp/init_system.lock
+    [ -f "/root/.meteorite/tmp/init_system.lock" ] && echo -e "${RGB_INFO}Notice: Init system script has already been run!${RGB_END}" && return
+    touch /root/.meteorite/tmp/init_system.lock
 
     TENCENTCLOUD=$( wget -qO- -t1 -T2 metadata.tencentyun.com )
     ALICLOUD=$( wget -qO- -t1 -T2 100.100.100.200 )
@@ -338,7 +338,7 @@ EOF
     fi
 
     # 安装新内核工具
-    if [ -f "${METEORITE_DIR}/tmp/install_kernel.lock" ]; then
+    if [ -f "/root/.meteorite/tmp/install_kernel.lock" ]; then
         yum remove $( rpm -qa | grep kernel | grep -v $(uname -r) ) -y
         yum -y --enablerepo=elrepo-kernel install ${KERNEL_VER}-{devel,doc,headers,tools,tools-libs,tools-libs-devel}
         echo "exclude=kernel* redhat-release* centos-release* fedora-release*" >> /etc/yum.conf
