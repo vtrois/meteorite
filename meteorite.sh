@@ -181,11 +181,11 @@ function meteorite_manual(){
         echo -e "${RGB_SUCCESS}System initialization completed.${RGB_END}"
     else
         service_overview
-        echo -e "${RGB_SUCCESS}Notice:${RGB_END}"
-        echo -e "${RGB_SUCCESS}1) Server needs to be reboot.${RGB_END}"
-        echo -e "${RGB_SUCCESS}2) Please check if the service is running normally after the server is started.${RGB_END}"
+        echo -e "${RGB_WARNING}Notice:${RGB_END}"
+        echo -e "${RGB_WARNING}1) Server needs to be reboot.${RGB_END}"
+        echo -e "${RGB_WARNING}2) Please check if the service is running normally after the server is started.${RGB_END}"
         if [ "${MANUAL_OPENRESTY}" == "y" ];then 
-            echo -e "${RGB_SUCCESS}3) If everything checks out, run the following command:${RGB_END} openssl dhparam -out ${OPENRESTY_DIR}/nginx/conf/ssl/dhparam.pem 4096"
+            echo -e "${RGB_WARNING}3) If everything checks out, run the following command:${RGB_END} openssl dhparam -out ${OPENRESTY_DIR}/nginx/conf/ssl/dhparam.pem 4096"
         fi
     fi
 
@@ -220,10 +220,10 @@ function meteorite_auto(){
     touch /root/.meteorite/tmp/meteorite_auto.lock
     clear_log
     service_overview
-    echo -e "${RGB_SUCCESS}Notice:${RGB_END}"
-    echo -e "${RGB_SUCCESS}1) The server is being restarted. ${RGB_END}"
-    echo -e "${RGB_SUCCESS}2) Please check if the service is running normally after the server is started.${RGB_END}"
-    echo -e "${RGB_SUCCESS}3) If everything checks out, run the following command:${RGB_END} openssl dhparam -out ${OPENRESTY_DIR}/nginx/conf/ssl/dhparam.pem 4096"
+    echo -e "${RGB_WARNING}Notice:${RGB_END}"
+    echo -e "${RGB_WARNING}1) The server is being restarted. ${RGB_END}"
+    echo -e "${RGB_WARNING}2) Please check if the service is running normally after the server is started.${RGB_END}"
+    echo -e "${RGB_WARNING}3) If everything checks out, run the following command:${RGB_END} openssl dhparam -out ${OPENRESTY_DIR}/nginx/conf/ssl/dhparam.pem 4096"
     reboot
 }
 
