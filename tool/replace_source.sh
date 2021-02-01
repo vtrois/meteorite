@@ -3,18 +3,9 @@
 # Github:    https://github.com/vtrois/meteorite
 # Author:    Seaton Jiang <seaton@vtrois.com>
 # License:   MIT
-# Date:      2021-01-28
+# Date:      2021-02-01
 
 function replace_source(){
-    TENCENTCLOUD=$( wget -qO- -t1 -T2 metadata.tencentyun.com )
-    ALICLOUD=$( wget -qO- -t1 -T2 100.100.100.200 )
-
-    if [ ! -z "${TENCENTCLOUD}" ]; then
-        MIRRORS_URL='http://mirrors.tencentyun.com'
-    elif [ ! -z "${ALICLOUD}" ]; then
-        MIRRORS_URL='http://mirrors.cloud.aliyuncs.com'
-    fi
-    
     yum install epel-release -y
 
     rm -rf /etc/yum.repos.d/*
@@ -72,6 +63,12 @@ enabled=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-elrepo.org
 protect=0
 EOF
+
+    if [ ! -z "$( wget -qO- -t1 -T2 metadata.tencentyun.com )" ]; then
+        MIRRORS_URL='http://mirrors.tencentyun.com'
+    elif [ ! -z "$( wget -qO- -t1 -T2 100.100.100.200 )" ]; then
+        MIRRORS_URL='http://mirrors.cloud.aliyuncs.com'
+    fi
 
     sed -i "s@https://mirrors.cloud.tencent.com@${MIRRORS_URL}@g" /etc/yum.repos.d/meteorite.repo
 

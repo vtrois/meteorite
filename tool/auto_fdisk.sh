@@ -3,7 +3,7 @@
 # Github:    https://github.com/vtrois/meteorite
 # Author:    Seaton Jiang <seaton@vtrois.com>
 # License:   MIT
-# Date:      2021-01-30
+# Date:      2021-02-01
 
 function fdisk_mkfs(){
 fdisk $1 << EOF
@@ -113,9 +113,7 @@ function auto_fdisk(){
     done
     echo -e "\n${RGB_INFO}6/6 : Write the configuration to /etc/fstab and mount the device${RGB_END}"
     echo -en "${RGB_WAIT}Writing...${RGB_END}"
-    TENCENTCLOUD=$( wget -qO- -t1 -T2 metadata.tencentyun.com )
-    ALICLOUD=$( wget -qO- -t1 -T2 100.100.100.200 )
-    if [ ! -z "${TENCENTCLOUD}" ]; then
+    if [ ! -z "$( wget -qO- -t1 -T2 metadata.tencentyun.com )" ]; then
         SDISK=$( echo ${DISK} | grep -o "/dev/.*vd[b-z]" | awk -F"/" '{print $(NF)}' )
         SOFTLINK=$( ls -l /dev/disk/by-id | grep "${SDISK}1" | awk -F" " '{print $(NF-2)}' )
         sed -i "/${SOFTLINK}/d" /etc/fstab >/dev/null 2>&1

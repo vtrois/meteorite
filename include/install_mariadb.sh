@@ -3,18 +3,15 @@
 # Github:    https://github.com/vtrois/meteorite
 # Author:    Seaton Jiang <seaton@vtrois.com>
 # License:   MIT
-# Date:      2021-01-28
+# Date:      2021-02-01
 
 function install_mariadb(){
     [ -f "/root/.meteorite/tmp/install_mariadb.lock" ] && echo -e "${RGB_INFO}Notice: MariaDB installation script has already been run!${RGB_END}" && return
     touch /root/.meteorite/tmp/install_mariadb.lock
 
-    TENCENTCLOUD=$( wget -qO- -t1 -T2 metadata.tencentyun.com )
-    ALICLOUD=$( wget -qO- -t1 -T2 100.100.100.200 )
-
-    if [ ! -z "${TENCENTCLOUD}" ]; then
+    if [ ! -z "$( wget -qO- -t1 -T2 metadata.tencentyun.com )" ]; then
         MIRRORS_URL='http://mirrors.tencentyun.com'
-    elif [ ! -z "${ALICLOUD}" ]; then
+    elif [ ! -z "$( wget -qO- -t1 -T2 100.100.100.200 )" ]; then
         MIRRORS_URL='http://mirrors.cloud.aliyuncs.com'
     fi
 
