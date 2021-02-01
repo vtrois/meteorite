@@ -28,6 +28,7 @@ source tool/clear_log.sh
 source tool/creat_trash.sh
 source tool/replace_source.sh
 source tool/service_overview.sh
+source tool/ssh_port.sh
 source tool/state_detection.sh
 source tool/system_info.sh
 
@@ -54,6 +55,7 @@ function show_help(){
     echo -e "  -c, --clear_log                Clear all system logs."
     echo -e "  -t, --creat_trash              Give the root account the rm command to create a recycle bin."
     echo -e "  -r, --replace_source           Optimize repo mirror sources."
+    echo -e "  -p, --ssh_port                 Change SSH port."
     echo -e "  -o, --service_overview         Show initial information about installed services."
     echo -e "  -s, --state_detection          Show information about the version of the software that has been installed."
     echo -e "  -i, --system_info              Show system configuration information."
@@ -300,6 +302,10 @@ while :; do
         ;;
         -r|--replace_source)
             replace_source
+            exit 0
+        ;;
+        -p|--ssh_port)
+            ssh_port
             exit 0
         ;;
         -o|--service_overview)
