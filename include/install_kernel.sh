@@ -8,7 +8,7 @@
 function install_kernel(){
     [ -f "/root/.meteorite/tmp/install_kernel.lock" ] && echo -e "${RGB_INFO}Notice: Kernel installation script has already been run!${RGB_END}" && return
 
-    [ -z "$( wget -qO- -t1 -T2 www.elrepo.org )" ] && echo -e "${RGB_ERROE}Error: Network connection is abnormal, please check the network and retry!${RGB_END}" && exit 1
+    [ -z "$( wget -qO- -t1 -T2 www.elrepo.org )" ] && echo -e "${RGB_ERROR}Error: Network connection is abnormal, please check the network and retry!${RGB_END}" && exit 1
 
     touch /root/.meteorite/tmp/install_kernel.lock
 
