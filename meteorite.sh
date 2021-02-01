@@ -9,6 +9,7 @@ export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/b
 export LANG="en_US.UTF-8"
 
 source options.conf
+
 source include/global_config.sh
 source include/global_check.sh
 source include/init_system.sh
@@ -23,9 +24,11 @@ source include/install_memcached.sh
 source include/install_imagemagick.sh
 source include/add_website.sh
 source include/del_website.sh
+
 source tool/auto_fdisk.sh
 source tool/clear_log.sh
 source tool/creat_trash.sh
+source tool/ntp_service.sh
 source tool/replace_source.sh
 source tool/service_overview.sh
 source tool/ssh_port.sh
@@ -49,16 +52,17 @@ function show_help(){
     echo -e "  --install_redis                Install version ${REDIS_VER} of Redis Server and version ${PECL_REDIS_VER} of pecl-redis."
     echo -e "  --install_memcached            Install version ${MEMCACHED_VER} of Memcached Server and version ${PECL_MEMCACHED_VER} of pecl-memcached."
     echo -e "  --install_imagemagick          Install version ${IMAGEMAGICK_VER} of ImageMagick Server and version ${PECL_IMAGICK_VER} of pecl-imagick."
-    echo -e "  -a, --add_website              Add website and related files"
-    echo -e "  -d, --del_website              Delete website and related files"
-    echo -e "  -f, --auto_fdisk               Hard drive auto fdisk tool."
-    echo -e "  -c, --clear_log                Clear all system logs."
-    echo -e "  -t, --creat_trash              Give the root account the rm command to create a recycle bin."
-    echo -e "  -r, --replace_source           Optimize repo mirror sources."
-    echo -e "  -p, --ssh_port                 Change SSH port."
-    echo -e "  -o, --service_overview         Show initial information about installed services."
-    echo -e "  -s, --state_detection          Show information about the version of the software that has been installed."
-    echo -e "  -i, --system_info              Show system configuration information."
+    echo -e "  --add_website                  Add website and related files"
+    echo -e "  --del_website                  Delete website and related files"
+    echo -e "  --auto_fdisk                   Hard drive auto fdisk tool."
+    echo -e "  --clear_log                    Clear all system logs."
+    echo -e "  --creat_trash                  Give the root account the rm command to create a recycle bin."
+    echo -e "  --replace_source               Optimize repo mirror sources."
+    echo -e "  --ntp_service                  Setting up NTP timing server."
+    echo -e "  --service_overview             Show initial information about installed services."
+    echo -e "  --ssh_port                     Change SSH port."
+    echo -e "  --state_detection              Show information about the version of the software that has been installed."
+    echo -e "  --system_info                  Show system configuration information."
     echo -e "  -v, --version                  Show the version info."
     echo -e "  -h, --help                     Print this help."
     echo -e "\nMail bug reports or suggestions to <support@vtrois.com>."
@@ -280,43 +284,47 @@ while :; do
             install_imagemagick 2>&1 | tee -a /root/.meteorite/log/install_imagemagick.log
             shift
         ;;
-        -a|--add_website)
+        --add_website)
             add_website
             exit 0
         ;;
-        -d|--del_website)
+        --del_website)
             del_website
             exit 0
         ;;
-        -f|--auto_fdisk)
+        --auto_fdisk)
             auto_fdisk
             exit 0
         ;;
-        -c|--clear_log)
+        --clear_log)
             clear_log
             exit 0
         ;;
-        -t|--creat_trash)
+        --creat_trash)
             creat_trash
             exit 0
         ;;
-        -r|--replace_source)
+        --ntp_service)
+            ntp_service
+            exit 0
+        ;;
+        --replace_source)
             replace_source
             exit 0
         ;;
-        -p|--ssh_port)
-            ssh_port
-            exit 0
-        ;;
-        -o|--service_overview)
+        --service_overview)
             service_overview
             exit 0
         ;;
-        -s|--state_detection)
+        --ssh_port)
+            ssh_port
+            exit 0
+        ;;
+        --state_detection)
             state_detection
             exit 0
         ;;
-        -i|--system_info)
+        --system_info)
             system_info
             exit 0
         ;;
