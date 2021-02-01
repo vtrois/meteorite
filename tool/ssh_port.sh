@@ -8,8 +8,8 @@
 function ssh_port(){
     clear
     check_info
-    [ ! -e "/etc/ssh/sshd_config" ] && echo -e "${RGB_ERROR}Error: Can't find sshd config file!${RGB_END}" && exit 1
 
+    [ ! -e "/etc/ssh/sshd_config" ] && echo -e "${RGB_ERROR}Error: Can't find sshd config file!${RGB_END}" && exit 1
     OLD_SSH_PORT=$( cat /etc/ssh/sshd_config | grep ^Port | awk '{print $2}' | head -1 )
     echo -en "${RGB_INFO}1/2 : Please enter SSH port (Range of 10000 to 65535, current is ${OLD_SSH_PORT}):${RGB_END}"
     while :; do
