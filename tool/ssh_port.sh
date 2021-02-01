@@ -35,6 +35,5 @@ function ssh_port(){
     echo -en "${RGB_WAIT}Checking...${RGB_END}"
     systemctl restart sshd.service >/dev/null 2>&1
     echo -e "\r${RGB_SUCCESS}Success, the SSH service restart completed!${RGB_END}\n"
-    echo -e "${RGB_WARNING}Please enable [TCP:${NEW_SSH_PORT}] for firewalld/iptables manually set if necessary!${RGB_END}"
     echo -e "${RGB_WARNING}If you use elastic compute service, please enable [TCP:${NEW_SSH_PORT}] for the security group!${RGB_END}"
 }

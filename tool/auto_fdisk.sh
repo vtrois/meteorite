@@ -79,37 +79,37 @@ function auto_fdisk(){
     echo -e "\r${RGB_SUCCESS}Success, the script is ready to be installed!${RGB_END}\n"
     echo -e "${RGB_INFO}2/6 : Show all active disks${RGB_END}"
     fdisk -l 2>/dev/null | grep -o "Disk /dev/.*vd[b-z]"
-    echo -en "\n${RGB_INFO}3/6 : Please choose the disk (e.g., /dev/vdb):${RGB_END}"
+    echo -en "\n${RGB_INFO}3/6 : Please choose the disk [e.g. /dev/vdb]:${RGB_END}"
     while :; do
-    read DISK
-    if [ -z "`echo ${DISK} | grep '^/dev/.*vd[b-z]'`" ]; then
-        echo -en "${RGB_ERROR}Please try again (e.g., /dev/vdb):${RGB_END}"
-    else
-        until fdisk -l 2>/dev/null | grep -o "Disk /dev/.*vd[b-z]" | grep "Disk ${DISK}" &>/dev/null;do
-            echo -en "${RGB_ERROR}Please try again (e.g., /dev/vdb):${RGB_END}"
-            read DISK
-        done
-        fdisk_mounted
-        break
-    fi
+        read DISK
+        if [ -z "`echo ${DISK} | grep '^/dev/.*vd[b-z]'`" ]; then
+            echo -en "${RGB_ERROR}Please try again [e.g. /dev/vdb]:${RGB_END}"
+        else
+            until fdisk -l 2>/dev/null | grep -o "Disk /dev/.*vd[b-z]" | grep "Disk ${DISK}" &>/dev/null;do
+                echo -en "${RGB_ERROR}Please try again [e.g. /dev/vdb]:${RGB_END}"
+                read DISK
+            done
+            fdisk_mounted
+            break
+        fi
     done
     echo -e "\n${RGB_INFO}4/6 : Partitioning and formatting the disk${RGB_END}"
     echo -en "${RGB_WAIT}Partitioning and formatting...${RGB_END}"
     fdisk_mkfs ${DISK} >/dev/null 2>&1
     echo -e "\r${RGB_SUCCESS}Success, the disk has been partitioned and formatted!${RGB_END}\n"
-    echo -en "${RGB_INFO}5/6 : Please enter a location to mount (Default directory: /data):${RGB_END}"
+    echo -en "${RGB_INFO}5/6 : Please enter a location to mount [Default: /data]:${RGB_END}"
     while :; do
-    read MOUNT
-    MOUNT=${MOUNT:-"/data"}
-    if [ -z "`echo ${MOUNT} | grep '^/'`" ]; then
-        echo -en "${RGB_ERROR}The directory must begin with /, please try again (Default directory: /data):${RGB_END}"
-    else
-        echo -en "${RGB_WAIT}Mounting...${RGB_END}"
-        mkdir ${MOUNT} >/dev/null 2>&1
-        mount ${DISK}1 ${MOUNT}
-        echo -e "\r${RGB_SUCCESS}Success, the mount is completed!${RGB_END}"
-        break
-    fi
+        read MOUNT
+        MOUNT=${MOUNT:-"/data"}
+        if [ -z "`echo ${MOUNT} | grep '^/'`" ]; then
+            echo -en "${RGB_ERROR}The directory must begin with /, please try again [Default: /data]:${RGB_END}"
+        else
+            echo -en "${RGB_WAIT}Mounting...${RGB_END}"
+            mkdir ${MOUNT} >/dev/null 2>&1
+            mount ${DISK}1 ${MOUNT}
+            echo -e "\r${RGB_SUCCESS}Success, the mount is completed!${RGB_END}"
+            break
+        fi
     done
     echo -e "\n${RGB_INFO}6/6 : Write the configuration to /etc/fstab and mount the device${RGB_END}"
     echo -en "${RGB_WAIT}Writing...${RGB_END}"
