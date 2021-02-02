@@ -3,7 +3,7 @@
 # Github:    https://github.com/vtrois/meteorite
 # Author:    Seaton Jiang <seaton@vtrois.com>
 # License:   MIT
-# Date:      2021-01-31
+# Date:      2021-02-02
 
 function check_info(){
     echo -e "${RGB_SUCCESS}            __  ___       __                      _  __                 ${RGB_END}"
@@ -33,8 +33,8 @@ function check_os(){
 }
 
 function check_ipv4(){
-    local IPV4=$( wget -qO- -t1 -T2 api-ipv4.ip.sb/ip )
-    [ -z "${IPV4}" ] && IPV4=$( wget -qO- -t1 -T2 ipv4.icanhazip.com )
+    local IPV4=$( wget -qO- -t1 -T2 ip.vtrois.com )
+    [ -z "${IPV4}" ] && IPV4=$( wget -qO- -t1 -T2 api-ipv4.ip.sb/ip )
     [ ! -z "${IPV4}" ] && echo ${IPV4}
 }
 
