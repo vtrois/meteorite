@@ -3,7 +3,7 @@
 # Github:    https://github.com/vtrois/meteorite
 # Author:    Seaton Jiang <seaton@vtrois.com>
 # License:   MIT
-# Date:      2021-01-31
+# Date:      2021-02-02
 
 function del_website(){
     clear
@@ -14,19 +14,24 @@ function del_website(){
 
     echo -e "${RGB_INFO}Website list:${RGB_END}"
     echo -e "${WEBSITE_LIST}"
-    echo -en "\n${RGB_INFO}Please enter the domain name of the website to be deleted [e.g. www.example.com]:${RGB_END}"
+    echo -en "\n${RGB_INFO}Please enter the domain name of the website to be deleted:${RGB_END}"
     while :; do
         read DOMAIN_NAME
-        if [ -z "$(echo ${DOMAIN_NAME} | grep '.*\..*')" ] || [ "${DOMAIN_NAME}" != "default" ]; then
+        if [ "${DOMAIN_NAME}" == "default" ]; then
+            rm -rf ${WWW_DIR}/default
+            rm -rf ${OPENRESTY_DIR}/nginx/conf/conf.d/default.conf
+            rm -rf ${LOGS_DIR}/nginx/default*.log
+            sed -i 's/#//' ${OPENRESTY_DIR}/nginx/conf/nginx.conf
+            systemctl reload nginx.service >/dev/null 2>&1
+            echo -e "\n${RGB_SUCCESS}Notice: Website deletion completed!${RGB_END}"
+            break
+        elif [ -z "$(echo ${DOMAIN_NAME} | grep '.*\..*')" ]; then
             echo -en "${RGB_ERROR}The domain name you entered is wrong, please try again:${RGB_END}"
         else
             if [ -e "${OPENRESTY_DIR}/nginx/conf/conf.d/${DOMAIN_NAME}.conf" ];then
                 rm -rf ${OPENRESTY_DIR}/nginx/conf/conf.d/${DOMAIN_NAME}.conf
                 if [ -e "${OPENRESTY_DIR}/nginx/conf/ssl/${DOMAIN_NAME}.key" ];then
                     rm -rf ${OPENRESTY_DIR}/nginx/conf/ssl/${DOMAIN_NAME}.{key,crt}
-                fi
-                if [ "${DOMAIN_NAME}" == 'default' ]; then
-                    sed -i 's/#//' ${OPENRESTY_DIR}/nginx/conf/nginx.conf
                 fi
                 ${OPENRESTY_DIR}/nginx/sbin/nginx -t >/dev/null 2>&1
                 systemctl reload nginx.service >/dev/null 2>&1
