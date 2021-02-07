@@ -3,7 +3,7 @@
 # Github:    https://github.com/vtrois/meteorite
 # Author:    Seaton Jiang <seaton@vtrois.com>
 # License:   MIT
-# Date:      2021-01-28
+# Date:      2021-02-07
 
 function install_openresty(){
     [ -f "/root/.meteorite/tmp/install_openresty.lock" ] && echo -e "${RGB_INFO}Notice: OpenResty installation script has already been run!${RGB_END}" && return
@@ -142,7 +142,6 @@ EOF
     sed -i "s@/data/logs@${LOGS_DIR}@g" ${OPENRESTY_DIR}/nginx/conf/nginx.conf
     sed -i "s@/data/www@${WWW_DIR}@g" ${OPENRESTY_DIR}/nginx/conf/conf.d/default.conf
     sed -i "s@/data/logs@${LOGS_DIR}@g" ${OPENRESTY_DIR}/nginx/conf/conf.d/default.conf
-    sed -i "s@Mver@${METEORITE_VER}@g" ${OPENRESTY_DIR}/nginx/conf/fastcgi.conf
 
     systemctl start nginx.service
 

@@ -3,7 +3,7 @@
 # Github:    https://github.com/vtrois/meteorite
 # Author:    Seaton Jiang <seaton@vtrois.com>
 # License:   MIT
-# Date:      2021-01-31
+# Date:      2021-02-07
 
 function add_website(){
     clear
@@ -101,7 +101,7 @@ function add_website(){
         else
             touch "${OPENRESTY_DIR}/nginx/conf/rewrite/${REWRITE_NAME}.conf"
         fi
-        REWRITE_RULE=$(echo -e "\ninclude rewrite/${REWRITE_NAME}.conf;")
+        REWRITE_RULE=$(echo -e "\n    include rewrite/${REWRITE_NAME}.conf;")
     fi
 
         cat > ${OPENRESTY_DIR}/nginx/conf/conf.d/${DOMAIN_NAME}.conf << EOF
