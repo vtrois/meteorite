@@ -3,19 +3,19 @@
 # Github:    https://github.com/vtrois/meteorite
 # Author:    Seaton Jiang <seaton@vtrois.com>
 # License:   MIT
-# Date:      2021-02-02
+# Date:      2021-02-09
 
 function check_info(){
-    echo -e "${RGB_SUCCESS}            __  ___       __                      _  __                 ${RGB_END}"
-    echo -e "${RGB_SUCCESS}           /  |/  /___   / /_ ___   ____   _____ (_)/ /_ ___            ${RGB_END}"
-    echo -e "${RGB_SUCCESS}          / /|_/ // _ \ / __// _ \ / __ \ / ___// // __// _ \           ${RGB_END}"
-    echo -e "${RGB_SUCCESS}         / /  / //  __// /_ /  __// /_/ // /   / // /_ /  __/           ${RGB_END}"
-    echo -e "${RGB_SUCCESS}        /_/  /_/ \___/ \__/ \___/ \____//_/   /_/ \__/ \___/            ${RGB_END}\n"
-    echo -e "${RGB_SUCCESS}Please read the instructions carefully before using the Meteorite tool. ${RGB_END}"
-    echo -e "${RGB_SUCCESS}If you encounter problems, please provide the files in the log folder.  ${RGB_END}\n"
-    echo -e "${RGB_SUCCESS}• Follow us on Weibo: https://weibo.com/vtrois                          ${RGB_END}"
-    echo -e "${RGB_SUCCESS}• For more information please visit: https://github.com/vtrois/meteorite${RGB_END}"
-    echo -e "${RGB_SUCCESS}• Mail bug reports or suggestions: support@vtrois.com                   ${RGB_END}\n"
+    echo -e "${RGB_SUCCESS}            __  ___       __                      _  __                  ${RGB_END}"
+    echo -e "${RGB_SUCCESS}           /  |/  /___   / /_ ___   ____   _____ (_)/ /_ ___             ${RGB_END}"
+    echo -e "${RGB_SUCCESS}          / /|_/ // _ \ / __// _ \ / __ \ / ___// // __// _ \            ${RGB_END}"
+    echo -e "${RGB_SUCCESS}         / /  / //  __// /_ /  __// /_/ // /   / // /_ /  __/            ${RGB_END}"
+    echo -e "${RGB_SUCCESS}        /_/  /_/ \___/ \__/ \___/ \____//_/   /_/ \__/ \___/             ${RGB_END}\n"
+    echo -e "${RGB_SUCCESS}Please read the instructions carefully before using the Meteorite tool.  ${RGB_END}"
+    echo -e "${RGB_SUCCESS}If you encounter problems, please provide the files in the log folder.   ${RGB_END}\n"
+    echo -e "${RGB_SUCCESS}• Mail bug reports or suggestions   : support@vtrois.com                 ${RGB_END}"
+    echo -e "${RGB_SUCCESS}• Follow us on Weibo                : https://weibo.com/vtrois           ${RGB_END}"
+    echo -e "${RGB_SUCCESS}• For more information please visit : https://github.com/vtrois/meteorite${RGB_END}\n"
 }
 
 function check_root(){
