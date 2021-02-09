@@ -3,7 +3,7 @@
 # Github:    https://github.com/vtrois/meteorite
 # Author:    Seaton Jiang <seaton@vtrois.com>
 # License:   MIT
-# Date:      2021-02-01
+# Date:      2021-02-09
 
 export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
 export LANG="en_US.UTF-8"
@@ -191,7 +191,7 @@ function meteorite_manual(){
         echo -e "${RGB_WARNING}1) Server needs to be reboot.${RGB_END}"
         echo -e "${RGB_WARNING}2) Please check if the service is running normally after the server is started.${RGB_END}"
         if [ "${MANUAL_OPENRESTY}" == "y" ];then 
-            echo -e "${RGB_WARNING}3) If everything checks out, run the following command:${RGB_END} openssl dhparam -out ${OPENRESTY_DIR}/nginx/conf/ssl/dhparam.pem 4096"
+            echo -e "${RGB_WARNING}3) If everything checks out, run the following command:${RGB_END}${RGB_WARNING} openssl dhparam -out ${OPENRESTY_DIR}/nginx/conf/ssl/dhparam.pem 4096${RGB_END}"
         fi
     fi
 
@@ -229,7 +229,7 @@ function meteorite_auto(){
     echo -e "${RGB_WARNING}Notice:${RGB_END}"
     echo -e "${RGB_WARNING}1) The server is being restarted. ${RGB_END}"
     echo -e "${RGB_WARNING}2) Please check if the service is running normally after the server is started.${RGB_END}"
-    echo -e "${RGB_WARNING}3) If everything checks out, run the following command:${RGB_END} openssl dhparam -out ${OPENRESTY_DIR}/nginx/conf/ssl/dhparam.pem 4096"
+    echo -e "${RGB_WARNING}3) If everything checks out, run the following command:${RGB_END}${RGB_WARNING} openssl dhparam -out ${OPENRESTY_DIR}/nginx/conf/ssl/dhparam.pem 4096${RGB_END}"
     reboot
 }
 

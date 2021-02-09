@@ -3,13 +3,13 @@
 # Github:    https://github.com/vtrois/meteorite
 # Author:    Seaton Jiang <seaton@vtrois.com>
 # License:   MIT
-# Date:      2021-02-07
+# Date:      2021-02-09
 
 function add_website(){
     clear
     check_info
     [ ! -e "${OPENRESTY_DIR}/nginx/sbin/nginx" ] && echo -e "${RGB_ERROR}Error: Nginx service is not installed!${RGB_END}" && exit 1
-    [ ! -e "${OPENRESTY_DIR}/nginx/conf/ssl/dhparam.pem" ] && echo -e "${RGB_ERROR}Error: The first time you use the script, you need to run the following code to generate the dhparam.pem file first:${RGB_END}" && echo -e "openssl dhparam -out ${OPENRESTY_DIR}/nginx/conf/ssl/dhparam.pem 4096\n" && exit 1
+    [ ! -e "${OPENRESTY_DIR}/nginx/conf/ssl/dhparam.pem" ] && echo -e "${RGB_ERROR}Error: The first time you use the script, you need to run the following code to generate the dhparam.pem file first:${RGB_END}" && echo -e "${RGB_WARNING}openssl dhparam -out ${OPENRESTY_DIR}/nginx/conf/ssl/dhparam.pem 4096${RGB_END}\n" && exit 1
 
     echo -en "${RGB_INFO}Please enter the domain name to be configured [e.g. www.example.com]:${RGB_END}"
     while :; do
@@ -139,6 +139,7 @@ EOF
         check_info
         echo -e "${RGB_INFO}Domain Name         ${RGB_END}: ${DOMAIN_NAME}"
         echo -e "${RGB_INFO}Domain Directory    ${RGB_END}: ${WWW_DIR}/${DOMAIN_NAME}"
+        echo -e "${RGB_INFO}Config File         ${RGB_END}: ${OPENRESTY_DIR}/nginx/conf/conf.d/${DOMAIN_NAME}.conf"
         echo -e "${RGB_INFO}Access Log          ${RGB_END}: ${LOGS_DIR}/nginx/${DOMAIN_NAME}_access.log"
         echo -e "${RGB_INFO}Error Log           ${RGB_END}: ${LOGS_DIR}/nginx/${DOMAIN_NAME}_error.log"
         if [ "${USE_REWRITE}" == 'y' ] || [ "${USE_REWRITE}" == 'Y' ];then
@@ -148,6 +149,7 @@ EOF
             echo -e "${RGB_INFO}SSL Certificate     ${RGB_END}: ${OPENRESTY_DIR}/nginx/conf/ssl/${DOMAIN_NAME}.crt"
             echo -e "${RGB_INFO}SSL Certificate Key ${RGB_END}: ${OPENRESTY_DIR}/nginx/conf/ssl/${DOMAIN_NAME}.key\n"
             echo -e "${RGB_SUCCESS}The website has been completed, please upload the SSL related files to the specified location.${RGB_END}"
+            echo -e "${RGB_SUCCESS}Finally, please execute the command to make it effective:${RGB_END}${RGB_WARNING} systemctl reload nginx.service${RGB_END}"
         fi
     fi
 }
