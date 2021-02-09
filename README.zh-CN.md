@@ -62,7 +62,7 @@ bash meteorite.sh --system_info
 bash meteorite.sh --ntp_service
 ```
 
-更多参数说明，请使用 `-h` 参数进行查询。
+更多工具说明，请使用 `-h` 参数进行查询。
 
 ## 版权说明
 
