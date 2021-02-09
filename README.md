@@ -2,7 +2,7 @@ English | [简体中文](README.zh-CN.md)
 
 ## About
 
-Meteorite tool is an operations and maintenance toolkit for CentOS 7 (CentOS 8 will be out of maintenance by the end of 2021, so it will not be supported and optimized for that version), with the main function of quickly deploying LNMP (PHP, MariaDB, OpenResty) production environments.
+Meteorite tool is an operations and maintenance toolkit for CentOS-7 (CentOS-8 will be out of maintenance by the end of 2021, so it will not be supported and optimized for that version), with the main function of quickly deploying LNMP (PHP, MariaDB, OpenResty) production environments.
 
 ## Download
 
