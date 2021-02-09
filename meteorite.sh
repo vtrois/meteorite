@@ -13,7 +13,6 @@ source options.conf
 source include/global_config.sh
 source include/global_check.sh
 source include/init_system.sh
-source include/install_kernel.sh
 source include/install_openssl.sh
 source include/install_openssh.sh
 source include/install_openresty.sh
@@ -34,6 +33,7 @@ source tool/service_overview.sh
 source tool/ssh_port.sh
 source tool/state_detection.sh
 source tool/system_info.sh
+source tool/upgrade_kernel.sh
 
 check_root
 check_os
@@ -43,7 +43,6 @@ function show_help(){
     echo -e "\nOption:"
     echo -e "  --auto                         Automatically installs LNMP environment without manual intervention."
     echo -e "  --init_system                  Initialize and harden the system."
-    echo -e "  --install_kernel               Install version ${KERNEL_VER} of the kernel."
     echo -e "  --install_openssl              Install version ${OPENSSL_VER} of OpenSSL."
     echo -e "  --install_openssh              Install version ${OPENSSH_VER} of OpenSSH."
     echo -e "  --install_openresty            Install version ${OPENRESTY_VER} of OpenResty."
@@ -63,6 +62,7 @@ function show_help(){
     echo -e "  --ssh_port                     Change SSH port."
     echo -e "  --state_detection              Show information about the version of the software that has been installed."
     echo -e "  --system_info                  Show system configuration information."
+    echo -e "  --upgrade_kernel               Upgrade version ${KERNEL_VER} of the kernel."
     echo -e "  -v, --version                  Show the version info."
     echo -e "  -h, --help                     Print this help."
     echo -e "\nMail bug reports or suggestions to <support@vtrois.com>."
@@ -248,10 +248,6 @@ while :; do
             init_system
             shift
         ;;
-        --install_kernel)
-            install_kernel 2>&1 | tee -a /root/.meteorite/log/install_kernel.log
-            exit 0
-        ;;
         --install_openssl)
             install_openssl 2>&1 | tee -a /root/.meteorite/log/install_openssl.log
             shift
@@ -326,6 +322,10 @@ while :; do
         ;;
         --system_info)
             system_info
+            exit 0
+        ;;
+        --upgrade_kernel)
+            upgrade_kernel 2>&1 | tee -a /root/.meteorite/log/upgrade_kernel.log
             exit 0
         ;;
         -v|--version)

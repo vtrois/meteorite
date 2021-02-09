@@ -3,7 +3,7 @@
 # Github:    https://github.com/vtrois/meteorite
 # Author:    Seaton Jiang <seaton@vtrois.com>
 # License:   MIT
-# Date:      2021-01-30
+# Date:      2021-02-09
 
 function init_system(){
     [ -f "/root/.meteorite/tmp/init_system.lock" ] && echo -e "${RGB_INFO}Notice: Init system script has already been run!${RGB_END}" && return
@@ -338,7 +338,7 @@ EOF
     fi
 
     # 安装新内核工具
-    if [ -f "/root/.meteorite/tmp/install_kernel.lock" ]; then
+    if [ -f "/root/.meteorite/tmp/upgrade_kernel.lock" ]; then
         yum remove $( rpm -qa | grep kernel | grep -v $(uname -r) ) -y
         yum -y --enablerepo=elrepo-kernel install ${KERNEL_VER}-{devel,doc,headers,tools,tools-libs,tools-libs-devel}
         echo "exclude=kernel* redhat-release* centos-release* fedora-release*" >> /etc/yum.conf

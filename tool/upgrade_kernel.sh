@@ -3,14 +3,14 @@
 # Github:    https://github.com/vtrois/meteorite
 # Author:    Seaton Jiang <seaton@vtrois.com>
 # License:   MIT
-# Date:      2021-02-01
+# Date:      2021-02-09
 
-function install_kernel(){
-    [ -f "/root/.meteorite/tmp/install_kernel.lock" ] && echo -e "${RGB_INFO}Notice: Kernel installation script has already been run!${RGB_END}" && return
+function upgrade_kernel(){
+    [ -f "/root/.meteorite/tmp/upgrade_kernel.lock" ] && echo -e "${RGB_INFO}Notice: Kernel installation script has already been run!${RGB_END}" && return
 
     [ -z "$( wget -qO- -t1 -T2 www.elrepo.org )" ] && echo -e "${RGB_ERROR}Error: Network connection is abnormal, please check the network and retry!${RGB_END}" && exit 1
 
-    touch /root/.meteorite/tmp/install_kernel.lock
+    touch /root/.meteorite/tmp/upgrade_kernel.lock
 
     yum update -y
     rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
