@@ -3,7 +3,7 @@
 # Github:    https://github.com/vtrois/meteorite
 # Author:    Seaton Jiang <seaton@vtrois.com>
 # License:   MIT
-# Date:      2021-01-30
+# Date:      2021-02-10
 
 RGB_SUCCESS='\033[32m'
 RGB_ERROR='\033[31;1m'
@@ -25,6 +25,12 @@ CHECK_MARIADB_PSW=$( dd if=/dev/urandom bs=1 count=15 2>/dev/null | base64 -w 0 
 
 PROCESSOR=$( grep 'processor' /proc/cpuinfo | sort -u | wc -l )
 MAXMEMORY=$( expr $CHECK_MEM / 8 )
+
+SSH_PORT=$( cat /etc/ssh/sshd_config | grep ^Port | awk '{print $2}' | head -1 )
+
+if [[ "${SSH_PORT}" != "22" ]]; then
+    sed -i "s@SSH_PORT='22'@SSH_PORT='${SSH_PORT}'@" ${METEORITE_DIR}/options.conf
+fi
 
 if [ "${MARIADB_PSW}" == "Meteorite-Mariadb" ]; then
     SET_MARIADB_PSW=${CHECK_MARIADB_PSW}
