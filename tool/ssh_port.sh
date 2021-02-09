@@ -3,7 +3,7 @@
 # Github:    https://github.com/vtrois/meteorite
 # Author:    Seaton Jiang <seaton@vtrois.com>
 # License:   MIT
-# Date:      2021-02-01
+# Date:      2021-02-09
 
 function ssh_port(){
     clear
@@ -24,7 +24,7 @@ function ssh_port(){
         fi
     done
     echo -en "${RGB_WAIT}Checking...${RGB_END}"
-    if [ "${OLD_SSH_PORT}" -ne "22" ]; then
+    if [ ${OLD_SSH_PORT} -ne 22 ]; then
         sed -i "s@^Port.*@Port ${NEW_SSH_PORT}@" /etc/ssh/sshd_config
     else
         sed -i "s@^#Port.*@&\nPort ${NEW_SSH_PORT}@" /etc/ssh/sshd_config
