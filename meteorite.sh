@@ -3,7 +3,7 @@
 # Github:    https://github.com/vtrois/meteorite
 # Author:    Seaton Jiang <seaton@vtrois.com>
 # License:   MIT
-# Date:      2021-02-09
+# Date:      2021-02-18
 
 export PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin
 export LANG="en_US.UTF-8"
@@ -13,6 +13,7 @@ source options.conf
 source include/global_config.sh
 source include/global_check.sh
 source include/init_system.sh
+source include/install_fileinfo.sh
 source include/install_openssl.sh
 source include/install_openssh.sh
 source include/install_openresty.sh
@@ -48,9 +49,10 @@ function show_help(){
     echo -e "  --install_openresty            Install version ${OPENRESTY_VER} of OpenResty."
     echo -e "  --install_php                  Install version ${PHP_VER} of PHP."
     echo -e "  --install_mariadb              Install version ${MARIADB_VER} of MariaDB."
-    echo -e "  --install_redis                Install version ${REDIS_VER} of Redis Server and version ${PECL_REDIS_VER} of pecl-redis."
-    echo -e "  --install_memcached            Install version ${MEMCACHED_VER} of Memcached Server and version ${PECL_MEMCACHED_VER} of pecl-memcached."
-    echo -e "  --install_imagemagick          Install version ${IMAGEMAGICK_VER} of ImageMagick Server and version ${PECL_IMAGICK_VER} of pecl-imagick."
+    echo -e "  --install_redis                Install version ${REDIS_VER} of Redis Server and version ${PECL_REDIS_VER} of pecl-redis for PHP."
+    echo -e "  --install_memcached            Install version ${MEMCACHED_VER} of Memcached Server and version ${PECL_MEMCACHED_VER} of pecl-memcached for PHP."
+    echo -e "  --install_imagemagick          Install version ${IMAGEMAGICK_VER} of ImageMagick Server and version ${PECL_IMAGICK_VER} of pecl-imagick for PHP."
+    echo -e "  --install_fileinfo             Install fileinfo module for PHP."
     echo -e "  --add_website                  Add website and related files"
     echo -e "  --del_website                  Delete website and related files"
     echo -e "  --auto_fdisk                   Hard drive auto fdisk tool."
@@ -278,6 +280,10 @@ while :; do
         ;;
         --install_imagemagick)
             install_imagemagick 2>&1 | tee -a /root/.meteorite/log/install_imagemagick.log
+            shift
+        ;;
+        --install_fileinfo)
+            install_fileinfo 2>&1 | tee -a /root/.meteorite/log/install_fileinfo.log
             shift
         ;;
         --add_website)
