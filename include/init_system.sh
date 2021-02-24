@@ -190,7 +190,7 @@ MaxAuthTries 3
 PubkeyAuthentication yes
 AuthorizedKeysFile .ssh/authorized_keys
 PermitEmptyPasswords no
-PasswordAuthentication no
+PasswordAuthentication yes
 ChallengeResponseAuthentication no
 GSSAPIAuthentication no
 GSSAPICleanupCredentials no
