@@ -3,7 +3,7 @@
 # Github:    https://github.com/vtrois/meteorite
 # Author:    Seaton Jiang <seaton@vtrois.com>
 # License:   MIT
-# Date:      2021-01-28
+# Date:      2021-02-24
 
 function install_php(){
     [ -f "/root/.meteorite/tmp/install_php.lock" ] && echo -e "${RGB_INFO}Notice: PHP installation script has already been run!${RGB_END}" && return
@@ -169,6 +169,8 @@ EOF
     sed -i "s@^;openssl.cafile.*@openssl.cafile = \"${OPENSSL_DIR}/cert.pem\"@" ${PHP_DIR}/etc/php.ini
     sed -i "s@^;openssl.capath.*@openssl.capath = \"${OPENSSL_DIR}/cert.pem\"@" ${PHP_DIR}/etc/php.ini
     sed -i "s@^;error_log = syslog.*@error_log = \"${LOGS_DIR}/php/php_error.log\"@" ${PHP_DIR}/etc/php.ini
+    sed -i 's@^pdo_mysql.default_socket.*@pdo_mysql.default_socket = /data/mariadb/mariadb.sock@' ${PHP_DIR}/etc/php.ini
+    sed -i 's@^mysqli.default_socket.*@mysqli.default_socket = /data/mariadb/mariadb.sock@' ${PHP_DIR}/etc/php.ini
 
     cat > ${PHP_DIR}/etc/php-fpm.conf << EOF
 ;;;;;;;;;;;;;;;;;;
